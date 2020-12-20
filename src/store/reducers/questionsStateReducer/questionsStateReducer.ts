@@ -1,10 +1,12 @@
-const initialState = {
+import { State, Action } from '../../../interfaces/interfaces';
+
+const initialState: State = {
   questionsData: [],
   trueAnswers: [],
   givenAnswers: []
 };
 
-function questionsStateReducer(state = initialState, action: any) {
+function questionsStateReducer(state = initialState, action: Action): State {
   switch (action.type) {
     case 'UPDATE_INITIAL_STATE':
       return action.payload

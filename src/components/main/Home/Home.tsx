@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { FetchData } from '../../../interfaces/interfaces';
 
 import { ActionButton } from '../../shared/ActionButton/ActionButton';
 import { MainContent } from '../../shared/MainContent/MainContent';
@@ -16,7 +17,7 @@ export const Home: React.FC = () => {
     if (shouldFetchQuestions) {
       setShouldFetchQuestions(false)
       getJson(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`)
-        .then((data: any) => {
+        .then((data: FetchData) => {
           if (data && data.results) {
             const trueAnswers = data.results.map((question: { correct_answer: string }) => question.correct_answer)
             dispatch({
