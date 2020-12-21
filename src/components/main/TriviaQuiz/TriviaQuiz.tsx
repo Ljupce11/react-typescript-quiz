@@ -17,6 +17,7 @@ export const TriviaQuiz: React.FC<Props> = ({ updateAction }) => {
   const [activeQuestion, setActiveQuestion] = useState<number>(0)
   const allAnswers = shuffleArray([...questionsData[activeQuestion].incorrect_answers, questionsData[activeQuestion].correct_answer]).sort()
 
+  // Show next question after answering and navigate to results screen after final question is answered
   const onAnswerHandler = (answer: string) => {
     if (activeQuestion + 1 < questionsData.length) {
       setActiveQuestion(activeQuestion + 1)
@@ -32,7 +33,9 @@ export const TriviaQuiz: React.FC<Props> = ({ updateAction }) => {
       <HeaderTitle title={questionsData[activeQuestion].category} />
       <div className="row py-5 justify-content-center">
         <div style={{ height: '200px' }} className="col-md-6 p-0 border d-flex flex-column justify-content-between">
+          {/* Display current question */}
           <TriviaQuizQuestion question={questionsData[activeQuestion].question} />
+          {/* Display all possible answers for the current questions */}
           <TriviaQuizAnswers
             allAnswers={allAnswers}
             onAnswerHandler={onAnswerHandler} />

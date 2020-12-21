@@ -1,3 +1,4 @@
+//services file where all fetch calls are stored and exported
 export const getJson = (url: string) => {
   try {
     return fetch(url, {

@@ -13,6 +13,7 @@ export const Home: React.FC = () => {
   const [mainAction, setMainAction] = useState('start')
   const dispatch = useDispatch()
 
+  //Fetch questions data from API and dispatch to redux state
   useEffect(() => {
     if (shouldFetchQuestions) {
       setShouldFetchQuestions(false)
@@ -33,6 +34,7 @@ export const Home: React.FC = () => {
     }
   }, [dispatch, shouldFetchQuestions])
 
+  // if BEGIN button is displayed, reset states and start over
   const onActionButtonHandler = (value: string) => {
     if (value === 'start') {
       setMainAction(value)
@@ -50,15 +52,18 @@ export const Home: React.FC = () => {
           {
             questionsData.length > 0 ?
               <React.Fragment>
+                {/* Main content where the quiz and other information is displayed */}
                 <MainContent
                   mainAction={mainAction}
                   updateAction={(value) => setMainAction(value)} />
 
+                {/* Main action button that navigates through different screens */}
                 <ActionButton
                   action={mainAction}
                   updateAction={onActionButtonHandler} />
               </React.Fragment>
               :
+              // if questions aren't loaded, display a spinner
               <div className="spinner-border text-dark" role="status">
                 <span className="sr-only">Loading...</span>
               </div>

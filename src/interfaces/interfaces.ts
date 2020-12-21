@@ -1,3 +1,4 @@
+// interfaces file where reusable interfaces are stored and exported
 export interface Question {
   category: string
   correct_answer: string

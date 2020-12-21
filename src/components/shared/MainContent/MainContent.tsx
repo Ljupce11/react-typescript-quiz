@@ -9,6 +9,7 @@ interface Props {
   updateAction: (value: string) => void
 }
 
+// Display different screens based on the current state of the application (Home screen, Quiz in progress screen and Results screen)
 export const MainContent: React.FC<Props> = ({ mainAction, updateAction }) => {
   if (mainAction === 'start') {
     return (

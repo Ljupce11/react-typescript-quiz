@@ -6,6 +6,7 @@ const initialState: State = {
   givenAnswers: []
 };
 
+// Store questions data in reducer and define actions
 function questionsStateReducer(state = initialState, action: Action): State {
   switch (action.type) {
     case 'UPDATE_INITIAL_STATE':

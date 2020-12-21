@@ -11,6 +11,7 @@ export const TriviaQuizResults: React.FC = () => {
   const answerTheme = ((answer: Answer) => answer.correct ? 'success' : 'danger')
   const quizResults: Answer[] = []
 
+  // Create an array of question objects, including properties for their title, the user's answer and boolean property if answer is correct or not
   if (givenAnswers.length === trueAnswers.length) {
     givenAnswers.forEach((given: string, id: number) => {
       quizResults.push({
