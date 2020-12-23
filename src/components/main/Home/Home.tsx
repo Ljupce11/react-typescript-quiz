@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FetchData } from '../../../interfaces/interfaces';
 
 import { ActionButton } from '../../shared/ActionButton/ActionButton';
 import { MainContent } from '../../shared/MainContent/MainContent';
 import { RootState } from '../../../store/reducers/rootReducer';
-import { getJson } from '../../../services/services';
+import { useFetchQuestions } from '../../../customHooks/useFetchQuestions/useFetchQuestions';
 
 export const Home: React.FC = () => {
   const { questionsData } = useSelector((state: RootState) => state.questions);
@@ -14,25 +13,7 @@ export const Home: React.FC = () => {
   const dispatch = useDispatch()
 
   //Fetch questions data from API and dispatch to redux state
-  useEffect(() => {
-    if (shouldFetchQuestions) {
-      setShouldFetchQuestions(false)
-      getJson(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`)
-        .then((data: FetchData) => {
-          if (data && data.results) {
-            const trueAnswers = data.results.map((question: { correct_answer: string }) => question.correct_answer)
-            dispatch({
-              type: 'UPDATE_INITIAL_STATE',
-              payload: {
-                questionsData: data.results,
-                trueAnswers: trueAnswers,
-                givenAnswers: []
-              }
-            })
-          }
-        })
-    }
-  }, [dispatch, shouldFetchQuestions])
+  useFetchQuestions(shouldFetchQuestions, () => setShouldFetchQuestions(false))
 
   // if BEGIN button is displayed, reset states and start over
   const onActionButtonHandler = (value: string) => {
